@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import StringModel from './models/String.js';
+import stringsRouter from './routes/strings.js';
 
 dotenv.config();
 
@@ -20,35 +20,7 @@ mongoose
   .catch((err) => console.error('MongoDB connection error:', err));
 
 // API Routes
-app.post('/api/strings', async (req, res) => {
-  try {
-    const { value } = req.body;
-
-    if (!value) {
-      return res.status(400).json({ error: 'String value is required' });
-    }
-    console.log('test');
-    const newString = new StringModel({ value });
-    await newString.save();
-
-    res.status(201).json({
-      message: 'String saved successfully',
-      data: newString,
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Get all strings (optional - for testing)
-app.get('/api/strings', async (req, res) => {
-  try {
-    const strings = await StringModel.find().sort({ createdAt: -1 });
-    res.json(strings);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+app.use('/api/strings', stringsRouter);
 
 // Start server
 app.listen(PORT, () => {
