@@ -1,8 +1,10 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const StringModel = require('./models/String');
+import dotenv from 'dotenv';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import StringModel from './models/String.js';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5001;
