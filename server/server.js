@@ -27,7 +27,7 @@ app.post('/api/strings', async (req, res) => {
     if (!value) {
       return res.status(400).json({ error: 'String value is required' });
     }
-    console.log(value);
+    console.log('test');
     const newString = new StringModel({ value });
     await newString.save();
 
