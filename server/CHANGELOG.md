@@ -5,7 +5,36 @@ All notable changes to the server project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0] - 2025-11-23
+## [1.2.0] - 2025-11-24
+
+### Added
+- User authentication system with JWT
+- User model with email and hashed password fields
+- POST `/api/auth/register` - Register new user
+- POST `/api/auth/login` - Login with credentials
+- Authentication middleware for JWT verification
+- Password hashing with bcryptjs (salt rounds: 10)
+- JWT token generation with 7-day expiration
+- Swagger documentation for authentication endpoints
+- .env.example file with JWT_SECRET documentation
+- Error logging for authentication endpoints
+- Development mode error details in API responses
+
+### Fixed
+- Updated User model pre-save hook for Mongoose 9 compatibility (removed callback-style next())
+- Fixed "next is not a function" error in password hashing
+
+### Security
+- Passwords are salted and hashed before storing in database
+- JWT tokens for secure authentication
+- Email validation and uniqueness enforcement
+- Minimum password length requirement (6 characters)
+
+### Dependencies
+- Added `bcryptjs@^3.0.3`
+- Added `jsonwebtoken@^9.0.2`
+
+## [1.1.1] - 2025-11-23
 
 ### Added
 - ESLint with Airbnb base style guide configuration
