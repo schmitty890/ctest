@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import stringsRouter from './routes/strings.js';
+import authRouter from './routes/auth.js';
 import { swaggerUi, specs } from './swagger.js';
 
 dotenv.config();
@@ -24,6 +25,7 @@ mongoose
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 // API Routes
+app.use('/api/auth', authRouter);
 app.use('/api/strings', stringsRouter);
 
 // Start server
