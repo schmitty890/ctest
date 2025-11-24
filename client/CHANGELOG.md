@@ -5,6 +5,18 @@ All notable changes to the client project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2025-11-23
+
+### Added
+- ESLint with Airbnb style guide configuration
+- ESLint plugins: import, jsx-a11y, react, react-hooks
+- NPM scripts for linting: `lint` and `lint:fix`
+
+### Changed
+- Fixed all ESLint violations in codebase
+- Moved styles object before component definition in StringForm.js
+- Added eslint-disable comments for intentional console statements
+
 ## [1.0.1] - 2025-11-23
 
 ### Removed
