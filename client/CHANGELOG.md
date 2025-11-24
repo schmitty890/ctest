@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Made Navbar sticky to remain visible at top when scrolling
 - Added z-index to ensure Navbar stays above other content
 
+### Fixed
+- Fixed mobile hamburger menu functionality by adding separate state management
+- Added complete mobile navigation menu that displays when hamburger button is clicked
+
 ## [1.2.1] - 2025-11-24
 
 ### Changed

@@ -3,6 +3,7 @@ import logo from '../assets/images/bank-of-america-logo.png';
 
 function Navbar() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
@@ -119,7 +120,7 @@ function Navbar() {
               type="button"
               aria-label="Toggle menu"
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <svg
                 className="h-6 w-6"
@@ -138,6 +139,52 @@ function Navbar() {
             </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <a
+                href="/"
+                className="block text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium"
+              >
+                Home
+              </a>
+              <a
+                href="/"
+                className="block text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium"
+              >
+                About
+              </a>
+              <a
+                href="https://www.google.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium"
+              >
+                Services
+              </a>
+              <a
+                href="/"
+                className="block text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium"
+              >
+                Contact
+              </a>
+              <a
+                href="/"
+                className="block text-gray-700 hover:bg-gray-100 hover:text-gray-900 px-3 py-2 rounded-md text-base font-medium"
+              >
+                Login
+              </a>
+              <a
+                href="/"
+                className="block bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-base font-medium"
+              >
+                Sign Up
+              </a>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
