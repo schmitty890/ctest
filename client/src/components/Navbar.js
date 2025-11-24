@@ -116,6 +116,7 @@ function Navbar() {
           <div className="flex items-center md:hidden">
             <button
               type="button"
+              aria-label="Toggle menu"
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
