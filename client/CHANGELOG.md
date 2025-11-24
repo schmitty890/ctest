@@ -5,6 +5,37 @@ All notable changes to the client project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2025-11-24
+
+### Added
+- Login page component with email/password form
+- Register page component with email/password form
+- AuthContext for managing authentication state across the app
+- JWT token persistence using localStorage
+- React Router for navigation between pages
+- Routes for `/login` and `/register` pages
+- User email display in Navbar when logged in
+- Sign Out button in Navbar for authenticated users
+- Mobile-responsive authentication UI
+
+### Changed
+- Updated Navbar to show user email instead of Login/Sign Up buttons when authenticated
+- Replaced static anchor tags with React Router Link components in Navbar
+- Navbar now uses AuthContext to check authentication status
+- Login and Sign Up buttons hidden when user is authenticated
+
+### Fixed
+- Fixed invisible input fields on login and register pages (inputs were hidden by sr-only labels)
+- Fixed ESLint violations in authentication components
+- Added explicit button types to Sign Out buttons
+- Wrapped AuthContext value in useMemo to prevent unnecessary re-renders
+- Separated labels from inputs to maintain visibility while keeping accessibility
+- Escaped special characters in JSX text
+
+### Dependencies
+- Added `react-router-dom@^7.9.6`
+- Added `prop-types` for component prop validation
+
 ## [1.2.2] - 2025-11-24
 
 ### Changed
