@@ -1,6 +1,6 @@
-# MERN Stack String Saver
+# MERN Stack Application with Authentication
 
-A simple full-stack application built with the MERN stack (MongoDB, Express, React, Node.js) that allows users to save and retrieve string values to a MongoDB Atlas database.
+A full-stack application built with the MERN stack (MongoDB, Express, React, Node.js) featuring user authentication and data management.
 
 ## Project Structure
 
@@ -9,15 +9,26 @@ ctest/
 ├── client/                 # React frontend
 │   ├── src/
 │   │   ├── components/
+│   │   │   ├── Navbar.js
+│   │   │   ├── Footer.js
 │   │   │   └── StringForm.js
+│   │   ├── context/
+│   │   │   └── AuthContext.js
+│   │   ├── pages/
+│   │   │   ├── Login.js
+│   │   │   └── Register.js
 │   │   ├── App.js
 │   │   └── index.js
 │   └── package.json
 ├── server/                 # Express backend
 │   ├── models/
-│   │   └── String.js      # MongoDB schema
+│   │   ├── String.js      # MongoDB schema
+│   │   └── User.js        # User model
 │   ├── routes/
-│   │   └── strings.js     # API routes
+│   │   ├── strings.js     # API routes
+│   │   └── auth.js        # Auth routes
+│   ├── middleware/
+│   │   └── auth.js        # JWT middleware
 │   ├── .env               # Environment variables
 │   ├── .gitignore
 │   ├── server.js          # Express server
@@ -27,31 +38,45 @@ ctest/
 
 ## Features
 
+- User authentication with JWT tokens
+- User registration and login
+- Password hashing with bcrypt
+- Protected routes with authentication middleware
 - Save string values to MongoDB Atlas
 - Retrieve all saved strings
+- Responsive navbar with mobile support
 - Real-time form validation
 - Success/error message display
 - Hot reload for development (frontend and backend)
 - ES6 module syntax
-- Organized route structure
+- API documentation with Swagger
+- ESLint code quality checks
 
 ## Tech Stack
 
 ### Frontend
 - **React** - UI library
+- **React Router** - Client-side routing
 - **Axios** - HTTP client for API requests
+- **Tailwind CSS** - Utility-first CSS framework
+- **Context API** - State management for authentication
 
 ### Backend
 - **Node.js** - Runtime environment
 - **Express** - Web framework
 - **MongoDB Atlas** - Cloud database
 - **Mongoose** - MongoDB object modeling
+- **JWT** - JSON Web Tokens for authentication
+- **bcryptjs** - Password hashing
+- **Swagger** - API documentation
 - **dotenv** - Environment variable management
 - **CORS** - Cross-origin resource sharing
 
 ### Development Tools
 - **Nodemon** - Auto-restart server on changes
 - **Create React App** - React development environment
+- **ESLint** - Code linting and quality checks
+- **Jest** - Testing framework
 
 ## Prerequisites
 
@@ -85,10 +110,11 @@ Create a `.env` file in the `server` folder:
 
 ```env
 MONGODB_URI=your_mongodb_atlas_connection_string
+JWT_SECRET=your_jwt_secret_key
 PORT=5001
 ```
 
-Replace `your_mongodb_atlas_connection_string` with your actual MongoDB Atlas connection string.
+Replace `your_mongodb_atlas_connection_string` with your actual MongoDB Atlas connection string and `your_jwt_secret_key` with a secure random string.
 
 ## Running the Application
 
@@ -106,9 +132,61 @@ npm start
 ```
 Frontend will run on `http://localhost:3000`
 
+## API Documentation
+
+Visit `http://localhost:5001/api-docs` when the server is running to view the complete Swagger API documentation.
+
 ## API Endpoints
 
-### POST /api/strings
+### Authentication
+
+#### POST /api/auth/register
+Register a new user account.
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response (201):**
+```json
+{
+  "token": "jwt_token_here",
+  "user": {
+    "id": "user_id",
+    "email": "user@example.com"
+  }
+}
+```
+
+#### POST /api/auth/login
+Login with existing credentials.
+
+**Request Body:**
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+**Response (200):**
+```json
+{
+  "token": "jwt_token_here",
+  "user": {
+    "id": "user_id",
+    "email": "user@example.com"
+  }
+}
+```
+
+### Strings
+
+#### POST /api/strings
 Save a new string to the database.
 
 **Request Body:**
@@ -153,14 +231,40 @@ Retrieve all saved strings, sorted by creation date (newest first).
 
 ### Backend (server/)
 - `npm start` - Start server with nodemon
-- `npm run dev` - Start server in development mode with nodemon
+- `npm run dev` - Start server in development mode
+- `npm test` - Run tests
+- `npm run test:coverage` - Run tests with coverage report
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors
 
 ### Frontend (client/)
 - `npm start` - Start React development server
 - `npm run build` - Build for production
 - `npm test` - Run tests
+- `npm run lint` - Run ESLint
+- `npm run lint:fix` - Fix ESLint errors
 
 ## MongoDB Schema
+
+**User Model:**
+```javascript
+{
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+}
+```
 
 **String Model:**
 ```javascript
@@ -181,6 +285,7 @@ Retrieve all saved strings, sorted by creation date (newest first).
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `MONGODB_URI` | MongoDB Atlas connection string | `mongodb+srv://user:pass@cluster.mongodb.net/dbname` |
+| `JWT_SECRET` | Secret key for JWT token generation | `your-secure-random-string` |
 | `PORT` | Server port number | `5001` |
 
 ## Notes
